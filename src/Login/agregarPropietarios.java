@@ -26,18 +26,19 @@ public class agregarPropietarios extends javax.swing.JFrame {
     }
 
     public void agregaPropietarios(){
-        String bd_propietarios = "insert into propietarios(run,nombre,apellido,block,departamento,estacionamiento,telefono) values (?,?,?,?,?,?,?)";
+        String bd_propietarios = "insert into propietarios(patente,run,nombre,apellido,block,departamento,estacionamiento,telefono) values (?,?,?,?,?,?,?,?)";
         
         try {
             PreparedStatement pst = con.prepareStatement(bd_propietarios);
             
-            pst.setString(1, txtRunAgregar.getText());
-            pst.setString(2, txtNombreAgregar.getText());
-            pst.setString(3, txtApellidoAgregar.getText());
-            pst.setString(4, txtBlockAgregar.getText());
-            pst.setString(5, txtDepartamentoAgregar.getText());
-            pst.setString(6, txtEstacionamientoAgregar.getText());
-            pst.setString(7, txtTelefonoAgregar.getText());
+            pst.setString(1, txtPatenteAgregar.getText());
+            pst.setString(2, txtRunAgregar.getText());
+            pst.setString(3, txtNombreAgregar.getText());
+            pst.setString(4, txtApellidoAgregar.getText());
+            pst.setString(5, txtBlockAgregar.getText());
+            pst.setString(6, txtDepartamentoAgregar.getText());
+            pst.setString(7, txtEstacionamientoAgregar.getText());
+            pst.setString(8, txtTelefonoAgregar.getText());
             pst.execute();
             JOptionPane.showMessageDialog(null, "Registro exitoso");
         } catch (HeadlessException | SQLException e) {
