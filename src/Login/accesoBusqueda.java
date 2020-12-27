@@ -1,20 +1,22 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package Login;
 
-/**
- *
- * @author Rakuszky
- */
+import conexionSQL.conexionMysql;
+import java.awt.HeadlessException;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import javax.swing.JOptionPane;
+
 public class accesoBusqueda extends javax.swing.JFrame {
 
-    
+    conexionMysql cc = new conexionMysql();
+    Connection con = cc.conexion();
     
     public accesoBusqueda() {
         initComponents();
+        setLocationRelativeTo(null);
     }
 
     /**
@@ -36,18 +38,17 @@ public class accesoBusqueda extends javax.swing.JFrame {
         jLabel8 = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
         etiquetaRUNBuscar = new javax.swing.JLabel();
-        jLabel13 = new javax.swing.JLabel();
+        etiquetaEstBuscar = new javax.swing.JLabel();
         txtPatenteBusqueda = new javax.swing.JTextField();
         aceptarBusqueda = new javax.swing.JButton();
-        jLabel16 = new javax.swing.JLabel();
-        jLabel17 = new javax.swing.JLabel();
-        jLabel18 = new javax.swing.JLabel();
-        jLabel19 = new javax.swing.JLabel();
-        jLabel20 = new javax.swing.JLabel();
+        etiquetaNombreBuscar = new javax.swing.JLabel();
+        etiquetaApellidoBuscar = new javax.swing.JLabel();
+        etiquetaBlockBuscar = new javax.swing.JLabel();
+        etiquetaDepartamentoBuscar = new javax.swing.JLabel();
+        etiquetaTelefonoBuscar = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Buscar y Autorizar - Modo Manual");
-        setPreferredSize(new java.awt.Dimension(450, 350));
         setResizable(false);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -91,9 +92,9 @@ public class accesoBusqueda extends javax.swing.JFrame {
         etiquetaRUNBuscar.setText(" ");
         jPanel1.add(etiquetaRUNBuscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 100, 130, -1));
 
-        jLabel13.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
-        jLabel13.setText(" ");
-        jPanel1.add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 250, 60, -1));
+        etiquetaEstBuscar.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
+        etiquetaEstBuscar.setText(" ");
+        jPanel1.add(etiquetaEstBuscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 250, 60, -1));
 
         txtPatenteBusqueda.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
         txtPatenteBusqueda.addActionListener(new java.awt.event.ActionListener() {
@@ -112,25 +113,25 @@ public class accesoBusqueda extends javax.swing.JFrame {
         });
         jPanel1.add(aceptarBusqueda, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 40, -1, -1));
 
-        jLabel16.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
-        jLabel16.setText(" ");
-        jPanel1.add(jLabel16, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 150, 100, -1));
+        etiquetaNombreBuscar.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
+        etiquetaNombreBuscar.setText(" ");
+        jPanel1.add(etiquetaNombreBuscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 150, 100, -1));
 
-        jLabel17.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
-        jLabel17.setText(" ");
-        jPanel1.add(jLabel17, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 150, 100, -1));
+        etiquetaApellidoBuscar.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
+        etiquetaApellidoBuscar.setText(" ");
+        jPanel1.add(etiquetaApellidoBuscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 150, 100, -1));
 
-        jLabel18.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
-        jLabel18.setText(" ");
-        jPanel1.add(jLabel18, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 200, 100, -1));
+        etiquetaBlockBuscar.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
+        etiquetaBlockBuscar.setText(" ");
+        jPanel1.add(etiquetaBlockBuscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 200, 100, -1));
 
-        jLabel19.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
-        jLabel19.setText(" ");
-        jPanel1.add(jLabel19, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 200, 70, -1));
+        etiquetaDepartamentoBuscar.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
+        etiquetaDepartamentoBuscar.setText(" ");
+        jPanel1.add(etiquetaDepartamentoBuscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 200, 70, -1));
 
-        jLabel20.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
-        jLabel20.setText(" ");
-        jPanel1.add(jLabel20, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 250, 100, -1));
+        etiquetaTelefonoBuscar.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
+        etiquetaTelefonoBuscar.setText(" ");
+        jPanel1.add(etiquetaTelefonoBuscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 250, 100, -1));
 
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 450, 350));
 
@@ -142,7 +143,43 @@ public class accesoBusqueda extends javax.swing.JFrame {
     }//GEN-LAST:event_txtPatenteBusquedaActionPerformed
 
     private void aceptarBusquedaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_aceptarBusquedaActionPerformed
-        
+        try{
+            String patente = txtPatenteBusqueda.getText();
+            
+            if (patente.length()>0){
+                String sql = "SELECT * FROM propietarios WHERE patente = '" + patente + "' ";
+                
+                Statement s = con.prepareStatement(sql);
+                ResultSet rs = s.executeQuery(sql);
+                
+                if (rs.next()){
+                    String run = rs.getString(3);
+                    String nombre = rs.getString(4);
+                    String apellido = rs.getString(5);
+                    String block = rs.getString(6);
+                    String departamento = rs.getString(7);
+                    String estacionamiento = rs.getString(8);
+                    String telefono = rs.getString(9);
+                    
+                    etiquetaRUNBuscar.setText(run);
+                    etiquetaNombreBuscar.setText(nombre);
+                    etiquetaApellidoBuscar.setText(apellido);
+                    etiquetaBlockBuscar.setText(block);
+                    etiquetaDepartamentoBuscar.setText(departamento);
+                    etiquetaEstBuscar.setText(estacionamiento);
+                    etiquetaTelefonoBuscar.setText(telefono);
+                    
+                }else{
+                    JOptionPane.showMessageDialog(null, "Patente no registrada en el sistema.");
+                    
+                    txtPatenteBusqueda.setText("");
+                }
+            }else{
+                JOptionPane.showMessageDialog(null, "Seleccione Patente");
+            }
+        } catch (HeadlessException | SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Error de conexión " + ex);
+        }
     }//GEN-LAST:event_aceptarBusquedaActionPerformed
 
     /**
@@ -182,15 +219,15 @@ public class accesoBusqueda extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton aceptarBusqueda;
+    private javax.swing.JLabel etiquetaApellidoBuscar;
+    private javax.swing.JLabel etiquetaBlockBuscar;
+    private javax.swing.JLabel etiquetaDepartamentoBuscar;
+    private javax.swing.JLabel etiquetaEstBuscar;
+    private javax.swing.JLabel etiquetaNombreBuscar;
     private javax.swing.JLabel etiquetaPatenteBusqueda;
     private javax.swing.JLabel etiquetaRUNBuscar;
     private javax.swing.JLabel etiquetaRUNnoAction;
-    private javax.swing.JLabel jLabel13;
-    private javax.swing.JLabel jLabel16;
-    private javax.swing.JLabel jLabel17;
-    private javax.swing.JLabel jLabel18;
-    private javax.swing.JLabel jLabel19;
-    private javax.swing.JLabel jLabel20;
+    private javax.swing.JLabel etiquetaTelefonoBuscar;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
